@@ -4,6 +4,7 @@ import com.aniruddha.stock.model.Quote;
 import com.aniruddha.stock.model.Quotes;
 import com.aniruddha.stock.repository.QuotesRepository;
 
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,6 +21,19 @@ public class DbServiceResource {
         this.quotesRepository = quotesRepository;
     }
 
+    
+    @GetMapping("/hello")
+    public String greeting() {
+        String text = "Hello Aniruddha";
+        return text;
+    }
+    
+    @GetMapping("/welcome")
+    public String welcome(@RequestParam(value="name", required=false, defaultValue="World") String name, Model model) {
+        model.addAttribute("name", name);
+        return "welcome";
+    }
+    
     @GetMapping("/{username}")
     public List<String> getQuotes(@PathVariable("username") final String username) {
 
